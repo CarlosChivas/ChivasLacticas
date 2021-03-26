@@ -31,12 +31,11 @@ vector<Token> Lexer::LexerAritmetico(string text)
                 {
                     cToken.sType = Entero;
                     cToken.sText.append(1, cChar);
-                } else if (cToken.sType == Flotante_exponencial) {
+                } else if (cToken.sType == Flotante_exponencial_posible) {
                     cToken.sType = Flotante_exponencial_positivo;
                     cToken.sText.append(1, cChar);
-                } else if (cToken.sType == Division){
-                    addToken(cToken, tokens);
-                    cToken.sType = Entero;
+                } else if (cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Flotante_exponencial_negativo;
                     cToken.sText.append(1, cChar);
                 }
                 else {
@@ -45,57 +44,77 @@ vector<Token> Lexer::LexerAritmetico(string text)
             break;
 
             case '.':
-                if(cToken.sType != Entero){
+
+                if (cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible) {
+                    cToken.sType = Error_token;
                     addToken(cToken, tokens);
+                }
+
+                if(cToken.sType == Entero){
+                    cToken.sType = Flotante;
+                    cToken.sText.append(1, cChar);
+
+                }
+                else{
                     cToken.sType = Error_token;
                     cToken.sText.append(1, cChar);
                     addToken(cToken, tokens);
                 }
-                else{
-                    if (cToken.sType == Entero)
-                    {
-                        cToken.sType = Flotante;
-                        cToken.sText.append(1, cChar);
-                    }
-                }
+
                 break;
             case '(':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 addToken(cToken, tokens);
                 cToken.sType = Parentesis_que_abre;
                 cToken.sText.append(1, cChar);
                 addToken(cToken, tokens);
-                    break;
+                break;
+
             case ')':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 addToken(cToken, tokens);
                 cToken.sType = Parentesis_que_cierra;
                 cToken.sText.append(1, cChar);
                 addToken(cToken, tokens);
                 break;
+
             case '=':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 addToken(cToken, tokens);
                 cToken.sType = Asignacion;
                 cToken.sText.append(1, cChar);
                 addToken(cToken, tokens);
                 break;
+
             case '+':
-                if(cToken.sType != Variable || cToken.sType != Entero){
-                    addToken(cToken, tokens);
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
                     cToken.sType = Error_token;
                     addToken(cToken, tokens);
                 }
-                else{
-                    addToken(cToken, tokens);
-                    cToken.sType = Suma;
-                    cToken.sText.append(1, cChar);
-                    addToken(cToken, tokens);
-                }
+                addToken(cToken, tokens);
+                cToken.sType = Suma;
+                cToken.sText.append(1, cChar);
+                addToken(cToken, tokens);
                 break;
+
             case '-':
-                if (cToken.sType == Flotante_exponencial) {
-                    cToken.sType = Flotante_exponencial_negativo;
+                if(cToken.sType == Flotante_exponencial_posible) {
+                    cToken.sType = Flotante_exponencial_negativo_posible;
                     cToken.sText.append(1, cChar);
+                } else if (cToken.sType == Flotante_exponencial_negativo_posible) {
+                     cToken.sType = Error_token;
+                     addToken(cToken, tokens);
                 }
-                else {
+                if (cToken.sType == Whitespace) {
                     addToken(cToken, tokens);
                     cToken.sType = Resta;
                     cToken.sText.append(1, cChar);
@@ -104,20 +123,32 @@ vector<Token> Lexer::LexerAritmetico(string text)
                 break;
 
             case '^':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
                     addToken(cToken, tokens);
-                    cToken.sType = Potencia;
-                    cToken.sText.append(1, cChar);
-                    addToken(cToken, tokens);
+                }
+                addToken(cToken, tokens);
+                cToken.sType = Potencia;
+                cToken.sText.append(1, cChar);
+                addToken(cToken, tokens);
                 break;
 
             case '*':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
                     addToken(cToken, tokens);
-                    cToken.sType = Multiplicacion;
-                    cToken.sText.append(1, cChar);
-                    addToken(cToken, tokens);
+                }
+                addToken(cToken, tokens);
+                cToken.sType = Multiplicacion;
+                cToken.sText.append(1, cChar);
+                addToken(cToken, tokens);
                 break;
 
             case '/':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 if(cToken.sType != Division){
                     addToken(cToken, tokens);
                     cToken.sType = Division;
@@ -131,18 +162,30 @@ vector<Token> Lexer::LexerAritmetico(string text)
 
             case ' ':
             case '\t':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 addToken(cToken, tokens);
                 break;
 
             case 'e':
             case 'E':
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 if(cToken.sType == Flotante){
-                    cToken.sType = Flotante_exponencial;
+                    cToken.sType = Flotante_exponencial_posible;
                     cToken.sText.append(1, cChar);
                     break;
                 }
 
             default:
+                if(cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible){
+                    cToken.sType = Error_token;
+                    addToken(cToken, tokens);
+                }
                 if (!isdigit(cChar) &&  !isalpha(cChar) && cChar != '_') {
                     addToken(cToken, tokens);
                     cToken.sType = Error_token;
@@ -167,9 +210,13 @@ vector<Token> Lexer::LexerAritmetico(string text)
 }
 
 void Lexer::addToken(Token &token, vector<Token> &tokens) {
-    if (token.sType != Whitespace) {
+    if (token.sType == Flotante_exponencial_posible || token.sType == Flotante_exponencial_negativo_posible) {
+        token.sType = Error_token;
+        tokens.push_back(token);
+    } else if (token.sType != Whitespace) {
         tokens.push_back(token);
     }
+
     token.sType = Whitespace;
     token.sText.erase();
 }
