@@ -2,6 +2,7 @@
 #define LEXER_H
 #include <vector>
 #include <string>
+
 using namespace std;
 
 enum TypeL {

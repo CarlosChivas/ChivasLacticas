@@ -1,6 +1,7 @@
+// Referencia: https://github.com/uliwitness/simpleparser
+
 #include <iostream>
 #include "Lexer.h"
-#include "Lexer.cpp"
 #include <vector>
 #include <string>
 #include <fstream>
