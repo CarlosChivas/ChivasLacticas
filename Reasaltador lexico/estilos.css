@@ -1,0 +1,47 @@
+.inline {
+  display: inline-flex;
+}
+.Entero,
+.Flotante,
+.Flotante_exponencial_positivo,
+.Flotante_exponencial_negativo {
+  color: skyblue;
+}
+
+.Logico {
+  color: darkgoldenrod;
+}
+
+.Simbolo {
+  color: forestgreen;
+}
+
+.Asignacion,
+.Suma,
+.Resta,
+.Multiplicacion,
+.Division,
+.Potencia {
+  color: red;
+}
+
+.Variable {
+  color: gray;
+}
+
+.Parentesis_que_abre,
+.Parentesis_que_cierra {
+  color: coral;
+}
+
+.Comentario {
+  color: plum;
+}
+
+.Reservada {
+  color: saddlebrown;
+}
+
+.Error_token {
+  color: purple;
+}
