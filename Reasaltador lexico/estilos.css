@@ -1,47 +1,47 @@
 .inline {
-  display: inline-flex;
-}
-.Entero,
-.Flotante,
-.Flotante_exponencial_positivo,
-.Flotante_exponencial_negativo {
-  color: skyblue;
-}
+    display: inline-flex;
+  }
+  .Entero,
+  .Flotante,
+  .Flotante_exponencial_positivo,
+  .Flotante_exponencial_negativo {
+    color: skyblue;
+  }
 
-.Logico {
-  color: darkgoldenrod;
-}
+  .Logico {
+    color: darkgoldenrod;
+  }
 
-.Simbolo {
-  color: forestgreen;
-}
+  .Simbolo {
+    color: forestgreen;
+  }
 
-.Asignacion,
-.Suma,
-.Resta,
-.Multiplicacion,
-.Division,
-.Potencia {
-  color: red;
-}
+  .Asignacion,
+  .Suma,
+  .Resta,
+  .Multiplicacion,
+  .Division,
+  .Potencia {
+    color: red;
+  }
 
-.Variable {
-  color: gray;
-}
+  .Variable {
+    color: gray;
+  }
 
-.Parentesis_que_abre,
-.Parentesis_que_cierra {
-  color: coral;
-}
+  .Parentesis_que_abre,
+  .Parentesis_que_cierra {
+    color: coral;
+  }
 
-.Comentario {
-  color: plum;
-}
+  .Comentario {
+    color: plum;
+  }
 
-.Reservada {
-  color: saddlebrown;
-}
+  .Reservada {
+    color: saddlebrown;
+  }
 
-.Error_token {
-  color: purple;
-}
+  .Error_token {
+    color: purple;
+  }

@@ -213,6 +213,9 @@ vector<Token> Lexer::LexerAritmetico(string text)
                 addToken(cToken, tokens);
             }
             addToken(cToken, tokens);
+            cToken.sType = Espacio;
+            cToken.sText.append(1, cChar);
+            addToken(cToken, tokens);
             break;
 
         case 'e':
@@ -243,6 +246,7 @@ vector<Token> Lexer::LexerAritmetico(string text)
             }
             break;
 
+            break;
         default:
             if (cToken.sType == Flotante_exponencial_posible || cToken.sType == Flotante_exponencial_negativo_posible)
             {

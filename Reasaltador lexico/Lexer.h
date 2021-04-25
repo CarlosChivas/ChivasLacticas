@@ -28,7 +28,8 @@ enum TypeL
     Logico_posible,
     Logico,
     Error_token,
-    Reservada
+    Reservada,
+    Espacio
 };
 
 static const char *TypeLArray[] = {
@@ -53,7 +54,9 @@ static const char *TypeLArray[] = {
     "Logico_posible",
     "Logico",
     "Error_token",
-    "Reservada"};
+    "Reservada",
+    "Espacio"
+    };
 
 class Token
 {
