@@ -14,16 +14,33 @@ void escribirToken(ofstream &archivo, string datos[2]);
 void enter(ofstream &archivo);
 void iniciarRenglon(ofstream &archivo);
 void terminarRenglon(ofstream &archivo);
-int main()
+
+int main(int argc, char *argv[])
 {
+    if (!argc)
+    {
+        cout << "Hace falta el argumento" << endl;
+        return 0;
+    }
     Lexer Lexer1;
     vector<Token> tokens;
 
-    ifstream ip("archivo.txt");
+    ifstream ip(argv[1]);
     string mes;
     //--------------------------------------------------------------------
     ofstream archivo;
-    archivo.open("prueba.html", ios::out);
+    string filename = argv[1];
+    const size_t last_slash_idx = filename.find_last_of("\\/");
+    if (std::string::npos != last_slash_idx)
+    {
+        filename.erase(0, last_slash_idx + 1);
+    }
+    const size_t period_idx = filename.rfind('.');
+    if (std::string::npos != period_idx)
+    {
+        filename.erase(period_idx);
+    }
+    archivo.open("C:\\Users\\Carlos\\Desktop\\Hilos\\Resultados\\" + filename + ".html", ios::out);
     if (archivo.fail())
     {
         cout << "No se pudo abrir el archivo" << endl;
