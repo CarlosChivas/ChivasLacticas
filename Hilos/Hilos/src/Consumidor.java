@@ -34,7 +34,7 @@ public class Consumidor extends Thread {
             {
                Runtime runTime = Runtime.getRuntime();
                
-               String directorioDeEjecutable = "C:\\Users\\Carlos\\Desktop\\Hilos\\C++\\main.exe " +producto;
+               String directorioDeEjecutable = "C:\\Users\\natal\\Desktop\\comp\\Hilos\\C++\\main.exe "+producto;
                Process process = runTime.exec(directorioDeEjecutable);
             }
             catch (Exception e)
@@ -43,11 +43,11 @@ public class Consumidor extends Thread {
             }
             System.out.println("Consume (" + this.id + "): " + producto);
             
-            try {
+     /*       try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }
     }
     

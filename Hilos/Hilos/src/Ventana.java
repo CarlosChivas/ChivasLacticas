@@ -82,6 +82,7 @@ public class Ventana extends javax.swing.JFrame {
             int nConsumidores = Integer.parseInt(entrada);
             System.out.println("Número de Consumidores " + nConsumidores);
             
+            long tiempo1 = System.currentTimeMillis();
             Almacen a = new Almacen();
             Productor p = new Productor(0, a);
             Consumidor[] c = new Consumidor[nConsumidores];
@@ -92,8 +93,18 @@ public class Ventana extends javax.swing.JFrame {
             }
              
             p.start();
+            
+            for (int i=0 ; i<nConsumidores ; i++) {
+                c[i].join();
+            }
+            long tiempo2 = System.currentTimeMillis();
+            System.out.println("Tiempo: ");
+            System.out.println(tiempo2-tiempo1);
+            
         } catch (NumberFormatException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException e){
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

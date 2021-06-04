@@ -26,7 +26,7 @@ public class Productor extends Thread{
     }
     
     File[] getArchivos() {
-        File directorio = new File("C:\\Users\\Carlos\\Desktop\\Hilos\\Archivos");
+        File directorio = new File("C:\\Users\\natal\\Desktop\\comp\\Hilos\\Archivos");
         File[] archivos = directorio.listFiles();
         for(File f : archivos) {
             String nombre = f.getName();
@@ -37,11 +37,13 @@ public class Productor extends Thread{
     
     @Override
     public void run() {
-        getArchivos();
+        //getArchivos();
         System.out.println("Productor " + this.id);
         //String productos = "AEIOU";
+        long tiempo1 = System.currentTimeMillis();
+        
         File[] productos = getArchivos();
-        Random r = new Random(System.currentTimeMillis());
+       // Random r = new Random(System.currentTimeMillis());
         String producto;
         int leng = productos.length;
         for (int i=0 ; i<leng ; i++) {
@@ -49,7 +51,6 @@ public class Productor extends Thread{
             producto = productos[i].toString();
             this.almacen.producir(producto);
             System.out.println("Produce (" + this.id + "): " + producto);
-          
             /*try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
