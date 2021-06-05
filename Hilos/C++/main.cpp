@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     {
         filename.erase(period_idx);
     }
-    archivo.open("C:\\Users\\natal\\Desktop\\comp\\Hilos\\Resultados\\" + filename + ".html", ios::out);
+    archivo.open("C:\\Users\\Carlos\\Desktop\\ChivasLacticas\\Hilos\\Resultados\\" + filename + ".html", ios::out);
 
     if (archivo.fail())
     {

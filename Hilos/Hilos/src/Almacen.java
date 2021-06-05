@@ -14,14 +14,18 @@ import java.util.logging.Logger;
  */
 public class Almacen {
     private String espacio;
-    
+    private Boolean end;
     Almacen() {
         this.espacio = "";
+        this.end = false;
     }
     
     synchronized String consumir() { 
         while (this.espacio == "") {
             try {
+                if(end){
+                    return "Fin";
+                }
                 wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Almacen.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,8 +46,10 @@ public class Almacen {
                 Logger.getLogger(Almacen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
         this.espacio = producto;
         notifyAll();
+    }
+    public void end(){
+        this.end = true;
     }
 }

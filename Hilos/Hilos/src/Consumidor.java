@@ -28,26 +28,24 @@ public class Consumidor extends Thread {
     public void run() {
         System.out.println("Consumidor " + this.id);
         String producto;
-        for (int i=0 ; i<5 ; i++) {
+        while (this.bandera) {
             producto = this.almacen.consumir();
+            if(producto == "Fin"){
+                break;
+            }
             try
             {
                Runtime runTime = Runtime.getRuntime();
                
-               String directorioDeEjecutable = "C:\\Users\\natal\\Desktop\\comp\\Hilos\\C++\\main.exe "+producto;
+               String directorioDeEjecutable = "C:\\Users\\Carlos\\Desktop\\ChivasLacticas\\Hilos\\C++\\main.exe "+producto;
                Process process = runTime.exec(directorioDeEjecutable);
+               process.waitFor();
             }
             catch (Exception e)
             {
                System.out.println("Hubo un error");
             }
-            System.out.println("Consume (" + this.id + "): " + producto);
-            
-     /*       try {
-                Thread.sleep(2000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            System.out.println("Consumidor (" + this.id + ") analizó el archivo: " + producto);
         }
     }
     

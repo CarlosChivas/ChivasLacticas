@@ -82,7 +82,6 @@ public class Ventana extends javax.swing.JFrame {
             int nConsumidores = Integer.parseInt(entrada);
             System.out.println("Número de Consumidores " + nConsumidores);
             
-            long tiempo1 = System.currentTimeMillis();
             Almacen a = new Almacen();
             Productor p = new Productor(0, a);
             Consumidor[] c = new Consumidor[nConsumidores];
@@ -91,8 +90,9 @@ public class Ventana extends javax.swing.JFrame {
                 c[i] = new Consumidor(i + 1, a);
                 c[i].start();
             }
-             
+            long tiempo1 = System.currentTimeMillis(); 
             p.start();
+            p.join();
             
             for (int i=0 ; i<nConsumidores ; i++) {
                 c[i].join();
